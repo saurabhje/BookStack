@@ -1,8 +1,45 @@
-import React from "react";
+import React, { useRef } from "react";
 import bgPhoto from "../assets/images/login_photo.jpg";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 function SignIn() {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const navigate = useNavigate()
+
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+
+    try{
+      const res = await fetch(`${BASE_URL}/user/signin`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({email, password}),
+      })
+
+      const data = await res.json();
+      const user = data.user;
+      
+      if (res.ok) {
+        console.log(data.message); 
+        navigate('/')
+      } else {
+        alert(data.error);
+      }
+
+    } catch(err){
+      console.error("Error during login:", err);
+      alert("Something went wrong.");
+    }
+  }
+
   return (
     <div className="min-h-screen w-full flex font-sans">
       <div className="w-1/2">
@@ -19,12 +56,14 @@ function SignIn() {
             Log In to your account
           </h2>
 
-          <form className="flex flex-col space-y-5">
+          <form onSubmit={handleSubmit} className="flex flex-col space-y-5">
             <div className="flex flex-col">
               <label className="text-white mb-1">Email</label>
               <input
                 type="email"
                 placeholder="Enter your email"
+                ref={emailRef}
+                required
                 className="p-3 rounded-lg bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
@@ -34,6 +73,8 @@ function SignIn() {
               <input
                 type="password"
                 placeholder="Enter your password"
+                ref={passwordRef}
+                required
                 className="p-3 rounded-lg bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
@@ -48,7 +89,7 @@ function SignIn() {
 
           <p className="mt-4 text-sm text-white/70 text-center">
             Don't have an account?{" "}
-            <Link to="/users/signup" className="text-blue-400 hover:underline cursor-pointer">Sign up</Link>
+            <Link to="/user/signup" className="text-blue-400 hover:underline cursor-pointer">Sign up</Link>
           </p>
         </div>
       </div>
