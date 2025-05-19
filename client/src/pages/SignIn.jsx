@@ -2,11 +2,15 @@ import React, { useRef } from "react";
 import bgPhoto from "../assets/images/login_photo.jpg";
 import { Link, useNavigate } from "react-router-dom"
 const BASE_URL = import.meta.env.VITE_API_URL;
+import { useDispatch } from "react-redux";
+import { setUser } from "../store/userSlice";
+
 
 function SignIn() {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -28,9 +32,10 @@ function SignIn() {
       const user = data.user;
       
       if (res.ok) {
-        console.log(data.message); 
+        dispatch(setUser(user));
         navigate('/')
-      } else {
+      } 
+      else {
         alert(data.error);
       }
 
