@@ -1,7 +1,10 @@
-import React from 'react'
-import { RouterProvider } from 'react-router-dom'
-import router from './routes'
-import Navbar from './components/navbar'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import SignIn from './pages/SignIn';
+import Home from './pages/Home';
+import SignUp from './pages/SignUp';
+import AddBook from './pages/AddBook';
 
 
 
@@ -9,10 +12,21 @@ import Navbar from './components/navbar'
 
 function App() {
   return (
-    <>
-      <Navbar/>
-      <RouterProvider router={router} />
-    </>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/user/signin" element={<SignIn />} />
+        <Route path="/user/signup" element={<SignUp />} />
+        <Route path='/admin/add-book' element={<AddBook/>} />
+      </Routes>
+    </BrowserRouter>
+
+    
+    // <>
+    //   <Navbar/>
+    //   <RouterProvider router={router} />
+    // </>
   )
 }
 

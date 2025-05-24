@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
-import bgPhoto from "../assets/images/login_photo.jpg";
+import bgPhoto from "../assets/images/login_photo.jpeg";
 import { Link, useNavigate } from "react-router-dom"
-const BASE_URL = import.meta.env.VITE_API_URL;
 import { useDispatch } from "react-redux";
 import { setUser } from "../store/userSlice";
 
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 function SignIn() {
   const emailRef = useRef();
@@ -46,7 +46,7 @@ function SignIn() {
   }
 
   return (
-    <div className="min-h-screen w-full flex font-sans">
+    <div className="min-h-screen h-screen w-full flex font-sans overflow-hidden">
       <div className="w-1/2">
         <img
           src={bgPhoto}
@@ -55,44 +55,44 @@ function SignIn() {
         />
       </div>
 
-      <div className="w-1/2 flex items-center justify-center bg-slate-900 px-4">
+      <div className="w-1/2 flex items-center justify-center bg-red-50 px-4">
         <div className="w-full max-w-md backdrop-blur-lg bg-white/10 border border-white/20 rounded-2xl shadow-2xl p-8">
-          <h2 className="text-white text-2xl font-bold mb-6 text-center">
+          <h2 className="text-gray-800 text-2xl font-bold mb-6 text-center">
             Log In to your account
           </h2>
 
           <form onSubmit={handleSubmit} className="flex flex-col space-y-5">
             <div className="flex flex-col">
-              <label className="text-white mb-1">Email</label>
+              <label className="text-black mb-1">Email</label>
               <input
                 type="email"
                 placeholder="Enter your email"
                 ref={emailRef}
                 required
-                className="p-3 rounded-lg bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="p-3 rounded-lg bg-black/20 text-black placeholder-black/70 focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
 
             <div className="flex flex-col">
-              <label className="text-white mb-1">Password</label>
+              <label className="text-black mb-1">Password</label>
               <input
                 type="password"
                 placeholder="Enter your password"
                 ref={passwordRef}
                 required
-                className="p-3 rounded-lg bg-white/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="p-3 rounded-lg bg-black/20 text-black placeholder-black/70 focus:outline-none focus:ring-2 focus:ring-blue-400"
               />
             </div>
 
             <button
               type="submit"
-              className="bg-white text-gray-800 hover:bg-gray-800 hover:text-white font-semibold py-3 rounded-lg transition duration-300"
+              className="bg-black/20 text-gray-800 hover:bg-gray-800 hover:text-white font-semibold py-3 rounded-lg transition duration-300"
             >
               Log In
             </button>
           </form>
 
-          <p className="mt-4 text-sm text-white/70 text-center">
+          <p className="mt-4 text-sm text-black/70 text-center">
             Don't have an account?{" "}
             <Link to="/user/signup" className="text-blue-400 hover:underline cursor-pointer">Sign up</Link>
           </p>
