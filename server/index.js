@@ -4,6 +4,8 @@ const connectDb = require('./connectDb');
 const cors = require('cors');
 const userRouter = require('./routes/user')
 const path = require('path');
+const checkAuthentication = require('./middlewares/auth');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const PORT = process.env.PORT || 5555;
@@ -14,10 +16,10 @@ app.use(cors({
   credentials: true
 }));
 
-// app.use(cors());
-
-app.use(express.static(path.resolve(__dirname, 'uploads')));
 app.use(express.json());
+app.use(cookieParser());
+// app.use(checkAuthentication);
+app.use(express.static(path.resolve(__dirname, 'uploads')));
 
 
 

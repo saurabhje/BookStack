@@ -50,4 +50,20 @@ async function handleUserSignIn(req,res){
   }
 }
 
-module.exports = { handleUserSignUp, handleUserSignIn };
+async function handleUserSignOut(req, res){
+
+  try{ 
+    res.clearCookie('token', {
+      httpOnly: true,
+      sameSite: 'Lax'
+    })
+
+    res.status(200).json({message: "Logged out successfully"});
+  } catch(error){
+      console.log(`LogOut Error: ${error.message}`);
+      res.status(500).json({error: "Logout failed"});
+  }
+}
+
+
+module.exports = { handleUserSignUp, handleUserSignIn, handleUserSignOut };
