@@ -7,6 +7,7 @@ function AddBook() {
   const authorRef = useRef();
   const descriptionRef = useRef();
   const publishDateRef = useRef();
+  const [category, setCategory] = useState("");
   const coverImageRef = useRef();
   const [coverImage, setCoverImage] = useState(null);
   const pdfRef = useRef();
@@ -45,6 +46,7 @@ function AddBook() {
     formData.append('author', authorRef.current.value);
     formData.append('description', descriptionRef.current.value);
     formData.append('publishDate', publishDateRef.current.value);
+    formData.append('category', category);
     formData.append('coverImage', coverImage);
     formData.append('pdfFile', pdfFile);
 
@@ -70,7 +72,7 @@ function AddBook() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6 mt-10">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6 pt-24">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-2xl bg-white p-8 rounded-lg shadow-lg space-y-6"
@@ -115,6 +117,26 @@ function AddBook() {
             required
             className="w-full p-3  rounded-lg bg-gray-100 black/10 focus:outline-black/40"
           />
+        </div>
+
+        <div>
+          <label className="block text-gray-700 font-medium mb-1">Category</label>
+          <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          required
+          className="w-full p-3  rounded-lg bg-gray-100 black/10 focus:outline-black/40"
+          >
+            <option value="">Select a category</option>
+            <option value="Action">Action</option>
+            <option value="Romance">Romance</option>
+            <option value="Knowledge">Knowledge</option>
+            <option value="Science Fiction">Science Fiction</option>
+            <option value="Mystery">Mystery</option>
+            <option value="History">History</option>
+            <option value="Biography">Biography</option>
+            <option value="Fantasy">Fantasy</option>
+          </select>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
