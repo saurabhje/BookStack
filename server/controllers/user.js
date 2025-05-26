@@ -5,9 +5,6 @@ async function handleUserSignUp(req,res){
   const profileImageUrl = req.file ? `/users/${req.file.filename}` : undefined;
 
   try{
-    console.log('Body:', req.body);
-    console.log('File:', req.file);
-
     await User.create({
       name,
       email,
@@ -17,12 +14,12 @@ async function handleUserSignUp(req,res){
 
     return res.status(201).json({ message: "Your account has been created. Please login to continue." });
 
-  } catch(error){
-    if (error.code === 11000 && error.keyPattern?.email) {
+  } catch(err){
+    if (err.code === 11000 && err.keyPattern?.email) {
       return res.status(400).json({ error: "Email already exists. Please use a different one." });
     }
 
-    console.error("Signup error:", error);
+    console.error("Signup error:", err);
     return res.status(500).json({ error: "Internal server error." });
   }
 
