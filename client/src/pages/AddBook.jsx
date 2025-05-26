@@ -51,24 +51,38 @@ function AddBook() {
     formData.append('pdfFile', pdfFile);
 
     try{
-      const res = await fetch(`${BASE_URL}/admin/add-book`, {
+      const res = await fetch(`${BASE_URL}/book/add-book`, {
         method: 'POST',
-        body: formData
+        body: formData,
+        credentials: 'include'
       })
 
       const data = await res.json();
       if (res.ok) {
         alert(data.message); 
+        resetForm();
       } else {
         alert(data.error || "Adding Book Failed");
       }
 
     } catch(err){
-      console.error('Error uploading book',err);
+      console.error(`Error uploading book ${err}`);
       alert("An error occurred while adding book");
     } finally{
       setUploading(false);
     }
+  }
+
+  const resetForm = () => {
+    titleRef.current.value = '';
+    authorRef.current.value = '';
+    descriptionRef.current.value = '';
+    publishDateRef.current.value = '';
+    setCategory(''); 
+    coverImageRef.current.value = null;
+    setCoverImage(null);
+    pdfRef.current.value = null;
+    setPdfFile(null);
   }
 
   return (
@@ -133,6 +147,7 @@ function AddBook() {
             <option value="Knowledge">Knowledge</option>
             <option value="Science Fiction">Science Fiction</option>
             <option value="Mystery">Mystery</option>
+            <option value="Crime">Crime</option>
             <option value="History">History</option>
             <option value="Biography">Biography</option>
             <option value="Fantasy">Fantasy</option>

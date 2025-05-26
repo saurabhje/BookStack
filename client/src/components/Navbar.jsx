@@ -86,7 +86,7 @@ function Navbar() {
                   </button>
                   {user.role==='ADMIN' &&
                     <button
-                      onClick={() => navigate('/admin/add-book')}
+                      onClick={() => navigate('/book/add-book')}
                       className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer rounded-b-md"
                     >
                       Add Book
