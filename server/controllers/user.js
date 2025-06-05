@@ -1,16 +1,35 @@
+const supabase = require("../database/supabase");
 const User = require("../models/user");
 
 async function handleUserSignUp(req,res){
   const {name, email, password} = req.body;
-  const profileImageUrl = req.file ? `/users/${req.file.filename}` : undefined;
+  const userAvatar = req.file;
 
   try{
-    await User.create({
+    const savedUser = await User.create({
       name,
       email,
       password,
-      profileImageUrl
     })
+
+    if(userAvatar){
+      const savedUserId = savedUser._id.toString();
+      const userAvatarExt = userAvatar.originalname.split('.').pop();
+      const userAvatarPath = `${savedUserId}/userAvatar.${userAvatarExt}`;
+
+      const{error: imageError} = await supabase.storage
+        .from('users')
+        .upload(userAvatarPath, userAvatar.buffer, {
+          contentType: userAvatar.mimetype
+        });
+      if(imageError) throw imageError;
+
+      const {data, error} = await supabase.storage.from('users').getPublicUrl(userAvatarPath);
+      const userAvatarUrl = data.publicUrl;
+      savedUser.userAvatarUrl = userAvatarUrl;
+
+      await savedUser.save();
+    }
 
     return res.status(201).json({ message: "Your account has been created. Please login to continue." });
 

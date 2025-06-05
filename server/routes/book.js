@@ -1,14 +1,17 @@
 const express = require('express');
-const { handleAddBook } = require('../controllers/book');
+const { handleAddBook, handleFetchBook } = require('../controllers/book');
 const upload = require('../middlewares/multer');
+const { restrictTo } = require('../middlewares/auth');
 const router = express.Router();
 
-const cpUploads = upload.fields([
+const fileUploads = upload.fields([
   {name: 'coverImage', maxCount:1},
   {name: 'pdfFile', maxCount:1},
 ])
 
-router.post('/add-book', cpUploads, handleAddBook);
+
+router.get('/', handleFetchBook)
+router.post('/add-book', restrictTo('ADMIN'), fileUploads, handleAddBook);
 
 
 module.exports = router

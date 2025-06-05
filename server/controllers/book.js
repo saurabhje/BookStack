@@ -1,6 +1,16 @@
 const Book = require("../models/book");
 const supabase = require('../database/supabase');
 
+async function handleFetchBook(req,res){
+  try{
+    const books = await Book.find({});
+    res.status(200).json(books)
+  } catch(err){
+    console.log(`Error in fetching books : ${err}`)
+    res.status(500).json({ error: 'Server error fetching books' });
+  }
+}
+
 async function handleAddBook(req,res){
   try{
     const {title, author, description, publishDate, category} = req.body;
@@ -27,8 +37,8 @@ async function handleAddBook(req,res){
     const {error: imageError} = await supabase.storage
       .from('books')
       .upload(coverImagePath, coverImage.buffer, {
-        contentType: coverImage.mimetype,
-        upsert: false,
+          contentType: coverImage.mimetype,
+          upsert: false,
       });
     if(imageError) throw imageError;
 
@@ -57,5 +67,6 @@ async function handleAddBook(req,res){
 }
 
 module.exports = {
+  handleFetchBook,
   handleAddBook
 }

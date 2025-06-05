@@ -25,7 +25,7 @@ app.use(express.static(path.resolve(__dirname, 'uploads')));
 
 
 app.use('/user', userRouter);
-app.use('/book', restrictTo('ADMIN'), bookRouter);
+app.use('/book', bookRouter);
 
 app.listen(PORT, () => {  
   connectDb();
