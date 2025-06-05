@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react'
-import avatar from '../assets/images/avatar.png'
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from '../store/userSlice';
@@ -71,7 +70,7 @@ function Navbar() {
           : <div className="relative" ref={dropdownRef}>
               <button onClick={() => setIsOpen(!isOpen)}>
                 <img 
-                  src={avatar} 
+                  src={user.userAvatarUrl} 
                   alt="Profile"
                   className="w-8 h-8 rounded-full border border-black/30 cursor-pointer hover:opacity-80 transition"
                 />

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import bgPhoto from "../assets/images/login_photo.jpeg";
+import background from "../assets/images/background.jpeg";
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { setUser } from "../store/userSlice";
@@ -49,7 +49,7 @@ function SignIn() {
     <div className="min-h-screen h-screen w-full flex font-sans overflow-hidden">
       <div className="w-1/2">
         <img
-          src={bgPhoto}
+          src={background}
           alt="Background theme"
           className="w-full h-full object-cover"
         />
@@ -86,7 +86,7 @@ function SignIn() {
 
             <button
               type="submit"
-              className="bg-black/20 text-gray-800 hover:bg-gray-800 hover:text-white font-semibold py-3 rounded-lg transition duration-300"
+              className="bg-black/20 text-gray-800 hover:bg-gray-800 hover:text-white font-semibold py-3 rounded-lg transition duration-300 cursor-pointer"
             >
               Log In
             </button>

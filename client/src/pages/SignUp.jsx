@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import bgPhoto from "../assets/images/login_photo.jpeg";
+import background from "../assets/images/background.jpeg";
 import avatar from '../assets/images/avatar.png'
 import { useNavigate } from "react-router-dom"
 const BASE_URL = import.meta.env.VITE_API_URL;
@@ -7,7 +7,7 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 
 function SignUp() {
   const[previewImage, setPreviewImage] = useState(avatar);
-  const [profileImageFile, setProfileImageFile] = useState(null);
+  const [profileImage, setProfileImage] = useState(null);
   const fileInputRef = useRef(null);
   const nameRef = useRef();
   const emailRef = useRef();
@@ -22,7 +22,7 @@ function SignUp() {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setProfileImageFile(file);
+      setProfileImage(file);
       setPreviewImage(URL.createObjectURL(file));
     }
   }
@@ -34,7 +34,7 @@ function SignUp() {
     formData.append('name', nameRef.current.value);
     formData.append('email', emailRef.current.value);
     formData.append('password', passwordRef.current.value);
-    formData.append('profileImageFile', profileImageFile);
+    formData.append('profileImage', profileImage);
 
     // console.log(nameRef.current.value ,emailRef.current.value,passwordRef.current.value,profileImg)
 
@@ -62,7 +62,7 @@ function SignUp() {
         {/*Left Side */}
         <div className="w-1/2">
           <img
-            src={bgPhoto}
+            src={background}
             alt="Background theme"
             className="w-full h-full object-cover"
           />
@@ -129,7 +129,7 @@ function SignUp() {
   
               <button
                 type="submit"
-                className="bg-black/20 text-gray-800 hover:bg-gray-800 hover:text-white font-semibold py-3 rounded-lg transition duration-300"
+                className="bg-black/20 text-gray-800 hover:bg-gray-800 hover:text-white font-semibold py-3 rounded-lg transition duration-300 cursor-pointer"
               >
                 Create Account
               </button>

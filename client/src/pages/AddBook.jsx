@@ -142,15 +142,11 @@ function AddBook() {
           className="w-full p-3  rounded-lg bg-gray-100 black/10 focus:outline-black/40"
           >
             <option value="">Select a category</option>
-            <option value="Action">Action</option>
-            <option value="Romance">Romance</option>
-            <option value="Knowledge">Knowledge</option>
-            <option value="Science Fiction">Science Fiction</option>
-            <option value="Mystery">Mystery</option>
             <option value="Crime">Crime</option>
-            <option value="History">History</option>
-            <option value="Biography">Biography</option>
-            <option value="Fantasy">Fantasy</option>
+            <option value="Fiction">Fiction</option>
+            <option value="Astronomy">Astronomy</option>
+            <option value="Economics">Economics</option>
+            <option value="Psychology">Psychology</option>
           </select>
         </div>
 
