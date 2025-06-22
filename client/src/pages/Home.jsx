@@ -46,6 +46,7 @@ function Home() {
         {books.map((book) => (
           <BookContainer 
             key= {book._id}
+            bookId = {book._id}
             coverImageUrl={book.coverImageUrl}
             title={book.title}
             author={book.author}

@@ -5,6 +5,7 @@ import SignIn from './pages/SignIn';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import AddBook from './pages/AddBook';
+import BookDetails from './pages/BookDetails';
 
 
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/user/signin" element={<SignIn />} />
         <Route path="/user/signup" element={<SignUp />} />
         <Route path='/book/add-book' element={<AddBook/>} />
+        <Route path='/book/:bookId' element={<BookDetails />} />
       </Routes>
     </BrowserRouter>
 
