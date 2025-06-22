@@ -10,7 +10,7 @@ const multer  = require('multer')
 //   }
 // })
 
-const storage = multer.memoryStorage();   //to store in the memory
+const storage = multer.memoryStorage();   //to store in the memory/ram
 
 const upload = multer({storage});
 
