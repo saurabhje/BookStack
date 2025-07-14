@@ -57,8 +57,14 @@ function Navbar() {
         <ul className="flex space-x-4 font-semibold text-xl">
           <li 
           onClick={() => navigate('/')}
-          className="cursor-pointer font-mono text-black hover:text-rose-500 transition">Home</li>
-          <li className="cursor-pointer font-mono text-black hover:text-rose-500 transition">Favourites</li>
+          className="cursor-pointer font-mono text-black hover:text-rose-500 transition">
+            Home</li>
+          {user && 
+            <li 
+            onClick={() => navigate('/library')}
+            className="cursor-pointer font-mono text-black hover:text-rose-500 transition">
+              Library</li>
+          }
         </ul>
 
         {!user 

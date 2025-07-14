@@ -3,29 +3,32 @@ import BookContainer from '../components/BookContainer';
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 
-function Home() {
-  const[books, setBooks] = useState([])
-  const[isLoading, setIsLoading] = useState(true)
+function Library() {
+  const[books, setBooks] = useState([]);
+  const[isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchBooks();
-  }, [])
+    fetchLibrary();
+  }, []);
 
-  const fetchBooks= async () => {
+  const fetchLibrary = async () => {
     try{
-      const res = await fetch(`${BASE_URL}/book`, {
+      const res = await fetch(`${BASE_URL}/library`, {
         credentials: 'include'
-      })
+      });
 
       const data = await res.json();
-      setBooks(data);
-      setIsLoading(false)
+      if(res.ok){
+        setBooks(data.library);
+      } else {
+        console.error("Error fetching library:", data.error);
+      }
     } catch(err){
-      console.error("Error Fetching books:", err);
-      alert("Error Fetching books");
+
+    } finally{
+      setIsLoading(false);
     }
   }
-
 
   return (
     isLoading ? (
@@ -38,6 +41,14 @@ function Home() {
             Loading...
           </span>
         </div>
+      </div>
+    )
+    :  books.length === 0 ? (
+      <div className="flex flex-col justify-center items-center min-h-screen text-center">
+        <div className="text-6xl mb-4">📚</div>
+        <h2 className="text-2xl font-bold text-gray-700 mb-2">Your Library is Empty</h2>
+        <p className="text-gray-500 mb-4">No books added to your library yet</p>
+        <p className="text-gray-400 text-sm">Start exploring and add some books to your collection!</p>
       </div>
     )
     : (
@@ -56,4 +67,4 @@ function Home() {
   )
 }
 
-export default Home
+export default Library
