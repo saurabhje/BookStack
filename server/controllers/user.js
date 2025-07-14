@@ -1,4 +1,5 @@
 const supabase = require("../database/supabase");
+const Book = require("../models/book");
 const User = require("../models/user");
 
 async function handleUserSignUp(req,res){
@@ -80,6 +81,5 @@ async function handleUserSignOut(req, res){
       res.status(500).json({error: "Logout failed"});
   }
 }
-
 
 module.exports = { handleUserSignUp, handleUserSignIn, handleUserSignOut };

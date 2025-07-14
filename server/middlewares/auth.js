@@ -4,7 +4,9 @@ const { validateUserToken } = require('../services/authentication');
 function checkAuthentication(req,res,next){
   const token = req.cookies?.token;
 
-  if(!token) return next();
+  if(!token){
+    return res.status(401).json({message: 'Please login to continue'});
+  }
 
   const payload = validateUserToken(token);
 

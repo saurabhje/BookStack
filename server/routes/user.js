@@ -4,8 +4,8 @@ const { handleUserSignUp, handleUserSignIn, handleUserSignOut } = require('../co
 const router = express.Router();
 
 router.post('/signup', upload.single('profileImage'), handleUserSignUp); 
-router.post('/signin', handleUserSignIn)
-router.post('/signout', handleUserSignOut)
+router.post('/signin', handleUserSignIn);
+router.post('/signout', handleUserSignOut);
 
 
-module.exports = router
+module.exports = router;

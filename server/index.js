@@ -4,8 +4,8 @@ const connectDb = require('./connectDb');
 const cors = require('cors');
 const userRouter = require('./routes/user')
 const bookRouter = require('./routes/book')
+const libraryRouter = require('./routes/library')
 const path = require('path');
-const {checkAuthentication, restrictTo} = require('./middlewares/auth');
 const cookieParser = require('cookie-parser');
 
 const app = express();
@@ -19,13 +19,13 @@ app.use(cors({
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(checkAuthentication);
 app.use(express.static(path.resolve(__dirname, 'uploads')));
 
 
 
 app.use('/user', userRouter);
 app.use('/book', bookRouter);
+app.use('/library', libraryRouter)
 
 app.listen(PORT, () => {  
   connectDb();

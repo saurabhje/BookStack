@@ -25,7 +25,13 @@ const userSchema = mongoose.Schema(
       type: String,
       enum: ["USER", "ADMIN"],
       default: "USER"
-    }
+    },
+    library: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'book'
+      }
+    ] 
   },
   {timestamps: true}
 )
