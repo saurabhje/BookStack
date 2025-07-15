@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify';
 const BASE_URL = import.meta.env.VITE_API_URL;
-// import { toast } from 'react-toastify';
 
 function BookDetails() {
   const {bookId} = useParams();
@@ -29,12 +29,12 @@ function BookDetails() {
         setIsLoading(false)
       }
       else{
-        alert(data.error);
+        toast.error(data.error);
       }
 
     } catch(err){
       console.error("Error during fetching book detail:", err);
-      alert("Error fetching book");
+      toast.error("Error fetching book");
     }
   }
 
@@ -54,13 +54,13 @@ function BookDetails() {
 
     } catch(err){
       console.error("Error checking library:", err);
-      alert("Error checking library");
+      toast.error("Error checking library");
     }
   }
 
   async function handleAddToLibrary(){
     if(!user){
-      alert("Please login to add to library");
+      toast.info("Please login to add to library");
       return;
     }
     setIsLibraryLoading(true);
@@ -73,15 +73,15 @@ function BookDetails() {
       const data = await res.json();
       if(res.ok){
         setIsInLibrary(true);
-        alert(data.message);
+        toast.success(data.message);
 
       } else {
-        alert(data.error || "Failed to add book to library");
+        toast.error(data.error || "Failed to add book to library");
       }
 
     } catch(err){
       console.error("Error adding to library:", err);
-      alert("Error adding to library.");
+      toast.error("Error adding to library.");
 
     } finally {
       setIsLibraryLoading(false);
@@ -99,14 +99,14 @@ function BookDetails() {
       const data = await res.json();
       if(res.ok){
         setIsInLibrary(false);
-        alert(data.message);
+        toast.success(data.message);
 
       } else {
-        alert(data.error || "Failed to remove book from library");
+        toast.error(data.error || "Failed to remove book from library");
       }
     } catch(err){
       console.error("Error removing from library:", err);
-      alert("Error removing from library.");
+      toast.error("Error removing from library.");
 
     } finally {
       setIsLibraryLoading(false);
@@ -115,7 +115,7 @@ function BookDetails() {
 
   async function handleReadBook(){
     if(!user){
-      alert("Please login to continue reading the book");
+      toast.info("Please login to continue reading the book");
       return;
     }
     window.open(book.pdfFileUrl, '_blank');

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { toast } from 'react-toastify';
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 
@@ -59,15 +60,15 @@ function AddBook() {
 
       const data = await res.json();
       if (res.ok) {
-        alert(data.message); 
+        toast.success(data.message); 
         resetForm();
       } else {
-        alert(data.error || "Adding Book Failed");
+        toast.error(data.error || "Adding Book Failed");
       }
 
     } catch(err){
       console.error(`Error uploading book ${err}`);
-      alert("An error occurred while adding book");
+      toast.error("An error occurred while adding book");
     } finally{
       setUploading(false);
     }

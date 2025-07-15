@@ -3,7 +3,7 @@ import background from "../assets/images/background.jpeg";
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { setUser } from "../store/userSlice";
-
+import { toast } from 'react-toastify';
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 function SignIn() {
@@ -36,12 +36,12 @@ function SignIn() {
         navigate('/')
       } 
       else {
-        alert(data.error);
+        toast.error(data.error);
       }
 
     } catch(err){
       console.error("Error during login:", err);
-      alert("Something went wrong.");
+      toast.error("Something went wrong.");
     }
   }
 

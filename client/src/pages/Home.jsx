@@ -22,7 +22,7 @@ function Home() {
       setIsLoading(false)
     } catch(err){
       console.error("Error Fetching books:", err);
-      alert("Error Fetching books");
+      toast.error("Error Fetching books");
     }
   }
 

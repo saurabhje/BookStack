@@ -46,13 +46,13 @@ function SignUp() {
 
       const data = await res.json();
       if (res.ok) {
-        alert(data.message); 
+        toast.info(data.message); 
       } else {
-        alert(data.error || "Signup failed.");
+        toast.error(data.error || "Signup failed.");
       }
     } catch(err){
         console.error(err);
-        alert("An error occurred while signing up.");
+        toast.error("An error occurred while signing up.");
     }
   }
 

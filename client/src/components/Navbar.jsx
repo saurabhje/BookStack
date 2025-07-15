@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from '../store/userSlice';
+import { toast } from 'react-toastify';
 
 
 const BASE_URL = import.meta.env.VITE_API_URL;
@@ -35,14 +36,14 @@ function Navbar() {
       if(res.ok){
         dispatch(clearUser())
         setIsOpen(false);
-        alert(data.message || "Signed out successfully.");
+        toast.success(data.message || "Signed out successfully.");
         navigate('/user/signin');
       } else{
-        alert(data.error || "Failed to sign out.");
+        toast.error(data.error || "Failed to sign out.");
       }
     } catch(error){
       console.error("Sign out error:", error);
-      alert("Something went wrong during sign out.");
+      toast.error("Something went wrong during sign out.");
     }
   };
 
